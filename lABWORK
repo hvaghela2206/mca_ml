@@ -1,0 +1,51 @@
+import cv2
+import matplotlib.pyplot as plt
+img=cv2.imread('lion.jpg')
+img=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+
+sobelx=cv2.Sobel(img,cv2.cv_64f,1,0,10)
+sobely=cv2.Sobel(img,cv2.cv_64f,0,1,10)
+sobel_combined=cv2.magnitute(sobelx,sobely)
+
+plt.figure(figsize=(10,6))
+plt.subplot(1,4,1),plt.imshow(img),plt.title('souce image'),plt.axis('off')
+plt.subplot(1,4,2),plt.imshow(sobelx,cmap='gray'),plt.title('sobelx'),plt.axis('off')
+plt.subplot(1,4,3),plt.imshow(sobely,cmap='gray'),plt.title('sobely'),plt.axis('off')
+plt.subplot(1,4,4),plt.imshow(sobel_combined,cmap='gray'),plt.title('sobel_combined'),plt.axis('off')
+
+
+laplacian:
+
+import cv2
+import matplotlib.pyplot as plt
+img=cv2.imread('lion.jpg')
+img=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+
+gauss=cv2.GaussianBlur(img,(3,3),0)
+
+laplacian=cv2.Laplacian(img,cv2.CV_64F,ksize=3)
+laplacian_after_blur=cv2.Laplacian(gauss,cv2.CV_64F,ksize=3)
+
+
+plt.figure(figsize=(10,6))
+plt.subplot(1,4,1),plt.imshow(img),plt.title('souce image'),plt.axis('off')
+plt.subplot(1,4,2),plt.imshow(laplacian,cmap='gray'),plt.title('lap'),plt.axis('off')
+plt.subplot(1,4,3),plt.imshow(laplacian_after_blur,cmap='gray'),plt.title('lap_gray'),plt.axis('off')
+
+canny:
+
+import cv2
+import matplotlib.pyplot as plt
+img=cv2.imread('lion.jpg')
+img=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+
+gauss=cv2.GaussianBlur(img,(3,3),0)
+
+canny=cv2.Canny(img,threshold1=20,threshold2=500)
+canny_after_blur=cv2.Canny(gauss,threshold1=20,threshold2=150)
+
+
+plt.figure(figsize=(10,6))
+plt.subplot(1,4,1),plt.imshow(img),plt.title('souce image'),plt.axis('off')
+plt.subplot(1,4,2),plt.imshow(canny,cmap='gray'),plt.title('canny'),plt.axis('off')
+plt.subplot(1,4,3),plt.imshow(canny_after_blur,cmap='gray'),plt.title('canny_after_blur'),plt.axis('off')
